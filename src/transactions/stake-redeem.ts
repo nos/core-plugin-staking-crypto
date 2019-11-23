@@ -17,8 +17,8 @@ export class StakeRedeemTransaction extends Transactions.Transaction {
             $id: "stakeRedeem",
             required: ["asset", "typeGroup"],
             properties: {
-                type: { transactionType: this.type },
-                typeGroup: { const: this.typeGroup },
+                type: { transactionType: StakeTransactionType.StakeRedeem },
+                typeGroup: { const: StakeTransactionGroup },
                 amount: { bignumber: { minimum: 0, maximum: 0 } },
                 asset: {
                     type: "object",
@@ -26,9 +26,9 @@ export class StakeRedeemTransaction extends Transactions.Transaction {
                     properties: {
                         stakeRedeem: {
                             type: "object",
-                            required: ["txId"],
+                            required: ["id"],
                             properties: {
-                                txId: {
+                                id: {
                                     type: "string",
                                     $ref: "hex",
                                     minLength: 64,
@@ -48,7 +48,7 @@ export class StakeRedeemTransaction extends Transactions.Transaction {
         const { data } = this;
         const stakeRedeem = data.asset.stakeRedeem as IStakeRedeemAsset;
 
-        const txIdBytes = Buffer.from(stakeRedeem.txId, "utf8");
+        const txIdBytes = Buffer.from(stakeRedeem.id, "utf8");
         const buffer = new ByteBuffer(txIdBytes.length + 1, true);
 
         buffer.writeUint8(txIdBytes.length);
@@ -62,7 +62,7 @@ export class StakeRedeemTransaction extends Transactions.Transaction {
         const stakeRedeem = {} as IStakeRedeemAsset;
 
         const txIdLength = buf.readUint8();
-        stakeRedeem.txId = buf.readString(txIdLength);
+        stakeRedeem.id = buf.readString(txIdLength);
 
         data.asset = {
             stakeRedeem,

@@ -1,21 +1,22 @@
 import { Interfaces, Transactions, Utils } from '@arkecosystem/crypto';
 
+import { StakeTransactionGroup, StakeTransactionType } from '../enums';
 import { StakeRedeemTransaction } from '../transactions/stake-redeem';
 
 export class StakeRedeemBuilder extends Transactions.TransactionBuilder<StakeRedeemBuilder> {
     constructor() {
         super();
         this.data.version = 2;
-        this.data.typeGroup = 100;
-        this.data.type = 2;
-        this.data.fee = StakeRedeemTransaction.staticFee();;
+        this.data.typeGroup = StakeTransactionGroup;
+        this.data.type = StakeTransactionType.StakeRedeem;
+        this.data.fee = StakeRedeemTransaction.staticFee();
         this.data.amount = Utils.BigNumber.ZERO;
-        this.data.asset = { stakeRedeem: { txId: "" } };
+        this.data.asset = { stakeRedeem: { id: "" } };
         this.signWithSenderAsRecipient = true;
     }
 
-    public stakeAsset(txId: string): StakeRedeemBuilder {
-        this.data.asset.stakeRedeem.txId = txId;
+    public stakeAsset(id: string): StakeRedeemBuilder {
+        this.data.asset.stakeRedeem.id = id;
         return this;
     }
 

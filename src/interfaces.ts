@@ -7,13 +7,13 @@ export interface IStakeCreateAsset {
 }
 
 export interface IStakeRedeemAsset {
-    txId: string;
+    id: string;
 }
 
 export type StakeLevel = "3m" | "6m" | "1y" | "2y";
 
 export interface IStakeObject {
-    transactionId: string;
+    id: string;
     timestamp: number;
     amount: Utils.BigNumber;
     duration: number;
