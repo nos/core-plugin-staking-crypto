@@ -1,6 +1,6 @@
 export enum StakeTransactionType {
-    StakeCreate = 1,
-    StakeRedeem = 2,
+    StakeCreate = 0,
+    StakeRedeem = 1,
 }
 
 export const StakeTransactionGroup = 100;
