@@ -2,7 +2,7 @@ import ByteBuffer from 'bytebuffer';
 
 import { Managers, Transactions, Utils } from '@arkecosystem/crypto';
 
-import { StakeTransactionGroup, StakeTransactionStaticFees, StakeTransactionType } from '../enums';
+import { StakeTransactionGroup, StakeTransactionType } from '../enums';
 import { IStakeCreateAsset } from '../interfaces';
 
 const { schemas } = Transactions;
@@ -27,6 +27,7 @@ export class StakeCreateTransaction extends Transactions.Transaction {
                 type: { transactionType: StakeTransactionType.StakeCreate },
                 typeGroup: { const: StakeTransactionGroup },
                 amount: { bignumber: { minimum: 0, maximum: 0 } },
+                fee: { bignumber: { minimum: 0, maximum: 0 } },
                 asset: {
                     type: "object",
                     required: ["stakeCreate"],
@@ -56,7 +57,7 @@ export class StakeCreateTransaction extends Transactions.Transaction {
         });
     }
 
-    protected static defaultStaticFee: Utils.BigNumber = Utils.BigNumber.make(StakeTransactionStaticFees.StakeCreate);
+    protected static defaultStaticFee: Utils.BigNumber = Utils.BigNumber.ZERO;
 
     public serialize(): ByteBuffer {
         // @ts-ignore
