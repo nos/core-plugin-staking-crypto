@@ -1,8 +1,7 @@
+import { Transactions, Utils } from '@arkecosystem/crypto';
 import ByteBuffer from 'bytebuffer';
 
-import { Transactions, Utils } from '@arkecosystem/crypto';
-
-import { StakeTransactionGroup, StakeTransactionStaticFees, StakeTransactionType } from '../enums';
+import { StakeTransactionGroup, StakeTransactionType } from '../enums';
 import { IStakeRedeemAsset } from '../interfaces';
 
 const { schemas } = Transactions;
@@ -42,7 +41,7 @@ export class StakeRedeemTransaction extends Transactions.Transaction {
         });
     }
 
-    protected static defaultStaticFee: Utils.BigNumber = Utils.BigNumber.make(StakeTransactionStaticFees.StakeRedeem);
+    protected static defaultStaticFee: Utils.BigNumber = Utils.BigNumber.ZERO;
 
     public serialize(): ByteBuffer {
         const { data } = this;
