@@ -64,7 +64,6 @@ export class StakeCreateTransaction extends Transactions.Transaction {
         const { data } = this;
         const stakeCreate = data.asset.stakeCreate as IStakeCreateAsset;
 
-        // TODO: Verify that this works
         const buffer = new ByteBuffer(24, true);
         buffer.writeUint64(+stakeCreate.duration);
         buffer.writeUint64(+stakeCreate.amount);
