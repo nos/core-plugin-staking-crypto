@@ -1,6 +1,6 @@
 import ByteBuffer from 'bytebuffer';
 
-import { Managers, Transactions, Utils } from '@arkecosystem/crypto';
+import { Transactions, Utils } from '@arkecosystem/crypto';
 
 import { StakeTransactionGroup, StakeTransactionType } from '../enums';
 import { IStakeCreateAsset } from '../interfaces';
@@ -13,12 +13,6 @@ export class StakeCreateTransaction extends Transactions.Transaction {
     public static key: string = "stakeCreate";
 
     public static getSchema(): Transactions.schemas.TransactionSchema {
-        const configManager = Managers.configManager;
-        const milestone = configManager.getMilestone();
-        const stakeLevels = [];
-        for (const duration of Object.keys(milestone.stakeLevels)) {
-            stakeLevels.push(Number(duration));
-        }
 
         return schemas.extend(schemas.transactionBaseSchema, {
             $id: "stakeCreate",
@@ -38,12 +32,11 @@ export class StakeCreateTransaction extends Transactions.Transaction {
                             properties: {
                                 duration: {
                                     type: "integer",
-                                    // Duration must exist in stakeLevels keys
-                                    enum: stakeLevels,
+                                    minimum: 0
                                 },
                                 amount: {
                                     bignumber: {
-                                        minimum: milestone.minimumStake,
+                                        minimum: 0,
                                     },
                                 },
                                 timestamp: {
@@ -64,7 +57,6 @@ export class StakeCreateTransaction extends Transactions.Transaction {
         const { data } = this;
         const stakeCreate = data.asset.stakeCreate as IStakeCreateAsset;
 
-        // TODO: Verify that this works
         const buffer = new ByteBuffer(24, true);
         buffer.writeUint64(+stakeCreate.duration);
         buffer.writeUint64(+stakeCreate.amount);
