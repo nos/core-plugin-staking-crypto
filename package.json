@@ -1,7 +1,7 @@
 {
   "name": "@nosplatform/stake-transactions-crypto",
   "description": "Provides stake trsanctions crypto logic for Ark Core",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "contributors": [
     "Dean van Dugteren <dean@nos.io>"
   ],
@@ -34,17 +34,17 @@
     "@sindresorhus/tsconfig": "^0.5.0",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.2",
-    "tslint": "^5.12.0",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.4",
-    "typedoc": "^0.15.0",
-    "ts-jest": "^24.0.2",
+    "cross-env": "^6.0.0",
+    "del-cli": "^3.0.0",
     "jest": "^24.8.0",
     "jest-extended": "^0.11.2",
-    "regenerator-runtime": "^0.13.0",
     "npm-check-updates": "^3.1.0",
-    "cross-env": "^6.0.0",
-    "del-cli": "^3.0.0"
+    "regenerator-runtime": "^0.13.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.2.4"
   },
   "publishConfig": {
     "access": "public"
