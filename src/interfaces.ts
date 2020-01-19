@@ -17,7 +17,7 @@ export interface IStakeObject {
     timestamp: number;
     amount: Utils.BigNumber;
     duration: number;
-    weight: Utils.BigNumber;
+    power: Utils.BigNumber;
     halved: boolean;
     redeemableTimestamp: number;
     redeemed: boolean;

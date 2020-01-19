@@ -1,6 +1,6 @@
 import ByteBuffer from 'bytebuffer';
 
-import { Transactions, Utils } from '@arkecosystem/crypto';
+import { Transactions, Utils, Managers } from '@arkecosystem/crypto';
 
 import { StakeTransactionGroup, StakeTransactionType } from '../enums';
 import { IStakeCreateAsset } from '../interfaces';
@@ -13,6 +13,7 @@ export class StakeCreateTransaction extends Transactions.Transaction {
     public static key: string = "stakeCreate";
 
     public static getSchema(): Transactions.schemas.TransactionSchema {
+        const stakeMin = Managers.configManager.getMilestone().minimumStake || 0;
 
         return schemas.extend(schemas.transactionBaseSchema, {
             $id: "stakeCreate",
@@ -36,7 +37,7 @@ export class StakeCreateTransaction extends Transactions.Transaction {
                                 },
                                 amount: {
                                     bignumber: {
-                                        minimum: 0,
+                                        minimum: stakeMin,
                                     },
                                 },
                                 timestamp: {

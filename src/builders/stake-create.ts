@@ -15,9 +15,9 @@ export class StakeCreateBuilder extends Transactions.TransactionBuilder<StakeCre
         this.signWithSenderAsRecipient = true;
     }
 
-    public stakeAsset(duration: number, amount: Utils.BigNumber): StakeCreateBuilder {
+    public stakeAsset(duration: number, amount: Utils.BigNumber|string): StakeCreateBuilder {
         this.data.asset.stakeCreate.duration = duration;
-        this.data.asset.stakeCreate.amount = amount;
+        this.data.asset.stakeCreate.amount = Utils.BigNumber.make(amount);
         this.data.asset.stakeCreate.timestamp = Crypto.Slots.getTime();
         return this;
     }
